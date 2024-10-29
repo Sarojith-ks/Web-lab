@@ -1,0 +1,201 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        h4 {
+            background-color: yellow;
+            color: red;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" name="form" onsubmit="return validateForm()">
+        <marquee id="head" direction="left" scrollamount="6">
+            <h4><b>WELCOME TO FRESHERS WORLD!!!</b></h4>
+        </marquee>
+        <center>
+            <table border="1" cellpadding="10" width="75%" class="sample">
+                <tr>
+                    <th colspan="3">REGISTRATION FORM</th>
+                </tr>
+                <tr>
+                    <td>NAME</td>
+                    <td colspan="2">
+                        <input type="text" id="name" name="name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>AGE</td>
+                    <td colspan="2">
+                        <select id="age" name="age">
+                            <option value="">Select</option>
+                            <script>
+                                for (let i = 18; i <= 30; i++) {
+                                    document.write(`<option value="${i}">${i}</option>`);
+                                }
+                            </script>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PASSWORD</td>
+                    <td colspan="2">
+                        <input type="password" id="password" name="passcode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>RETYPE PASSWORD</td>
+                    <td colspan="2">
+                        <input type="password" id="retype" />
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">SELECT YOUR SECURITY QUESTION</td>
+                    <td colspan="2">
+                        <input type="radio" name="securityQuestion" value="pet_name" id="q1">What is your pet name?
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="radio" name="securityQuestion" value="best_friend" id="q2">Who is your best friend?
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="radio" name="securityQuestion" value="favorite_color" id="q3">What is your favourite color?
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="radio" name="securityQuestion" value="favorite_teacher" id="q4">Who is your favourite teacher?
+                    </td>
+                </tr>
+                <tr>
+                    <td>ANSWER OF SECURITY QUESTION</td>
+                    <td colspan="2">
+                        <input type="text" id="qans" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>EMAIL ID</td>
+                    <td colspan="2">
+                        <input type="email" id="email" name="email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>LANGUAGES KNOWN</td>
+                    <td colspan="2">
+                        <input type="checkbox" id="l1" /> MALAYALAM
+                        <input type="checkbox" id="l2" /> ENGLISH
+                        <input type="checkbox" id="l3" /> HINDI
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">PHONE NUMBER</td>
+                    <td>HOME</td>
+                    <td>OFFICE</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="home" name="home" /></td>
+                    <td><input type="text" id="office" name="office" /></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">ADDRESS</td>
+                    <td>PERMANENT ADDRESS</td>
+                    <td>TEMPORARY ADDRESS</td>
+                </tr>
+                <tr>
+                    <td><textarea id="permanent" rows="4" cols="35"></textarea></td>
+                    <td><textarea id="temporary" rows="4" cols="35"></textarea></td>
+                </tr>
+                <tr>
+                    <td>UPLOAD CV</td>
+                    <td colspan="2">
+                        <input type="file" id="cv" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;">
+                        <input type="reset" value="Reset" style="background-color:red;color:white" />
+                    </td>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Submit" style="background-color:green;color:white" />
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+    <script>
+        function validateForm() {
+            var name = document.form.name.value;
+            var email = document.form.email.value;
+            var passcode = document.form.passcode.value;
+            var retype = document.getElementById('retype').value;
+            var permanentAddress = document.getElementById('permanent').value;
+            var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (name == "") {
+                alert("Enter Name !!");
+                document.form.name.focus();
+                return false;
+            }
+
+            if (!/^[A-Za-z\s]+$/.test(name)) {
+                alert("Enter a valid Name !!");
+                document.form.name.focus();
+                return false;
+            }
+
+            if (email == "") {
+                alert("Enter email!!");
+                document.form.email.focus();
+                return false;
+            } else if (!emailPattern.test(email)) {
+                alert("Enter a valid email id !!");
+                document.form.email.focus();
+                return false;
+            }
+
+            var homePhone = document.form.home.value;
+            if (homePhone == "" || isNaN(homePhone) || homePhone.length != 10) {
+                alert("Enter a valid 10-digit Home phone number");
+                document.form.home.focus();
+                return false;
+            }
+            var officePhone = document.form.office.value;
+            if (officePhone == "" || isNaN(officePhone) || officePhone.length != 10) {
+                alert("Enter a valid 10-digit office phone number");
+                document.form.office.focus();
+                return false;
+            }
+
+            if (passcode == "" || passcode.length < 8 || !re.test(passcode)) {
+                alert("Enter a minimum 8-character password with at least one lowercase, one uppercase, one digit, and one special character!");
+                document.form.passcode.focus();
+                return false;
+            }
+
+            if (retype == "" || retype !== passcode) {
+                alert("Passwords do not match!");
+                document.getElementById('retype').focus();
+                return false;
+            }
+
+            if (permanentAddress == "") {
+                alert("Enter your Permanent Address!");
+                document.getElementById('permanent').focus();
+                return false;
+            }
+
+            return true; 
+        }
+    </script>
+</body>
+</html>
+
