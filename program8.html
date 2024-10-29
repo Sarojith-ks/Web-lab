@@ -192,6 +192,11 @@
                 document.getElementById('permanent').focus();
                 return false;
             }
+            var languagesChecked = document.querySelectorAll('input[type="checkbox"]:checked');
+        if (languagesChecked.length === 0) {
+            alert("Please select at least one language known!");
+            return false;
+            }
 
             return true; 
         }
